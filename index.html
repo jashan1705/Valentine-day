@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Valentine My love ❤️</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  overflow:hidden;
+}
+
+/* glass card */
+.card{
+  width:90%;
+  max-width:420px;
+  padding:30px 20px;
+  border-radius:22px;
+  text-align:center;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.15);
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  color:#fff;
+  animation:fadeIn 1.2s ease;
+  position:relative;
+  z-index:2;
+}
+
+h1{font-size:1.8rem;margin-bottom:10px}
+p{font-size:1rem;margin-bottom:22px;line-height:1.6}
+
+.heart{font-size:3rem;animation:beat 1s infinite;margin-bottom:15px}
+
+/* buttons stay in SAME position */
+.buttons{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  margin-top:10px;
+  position:relative;
+}
+
+button{
+  border:none;
+  padding:14px 26px;
+  font-size:1rem;
+  border-radius:40px;
+  cursor:pointer;
+  transition:transform 0.6s cubic-bezier(.25,.8,.25,1), opacity 0.5s ease, z-index 0.3s ease;
+}
+
+.yes{
+  background:#ff4d6d;
+  color:#fff;
+  z-index:1;
+}
+
+.no{
+  background:#fff;
+  color:#ff4d6d;
+  z-index:2;
+}
+
+.message{
+  margin-top:25px;
+  font-size:1.1rem;
+  display:none;
+  animation:fadeIn 0.8s ease;
+}
+
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.float{
+  position:absolute;
+  bottom:-40px;
+  animation:floatUp linear forwards;
+  opacity:0.95;
+  z-index:1;
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-130vh);opacity:0}
+}
+
+  </style>
+</head>
+<body>  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>Hey My Love</h1>
+    <p>You are my favorite feeling and my forever person.</p>
+    <p><strong>Will you be my Valentine? 💌</strong></p><div class="buttons">
+  <button class="yes" id="yesBtn" onclick="sayYes()">Yes ❤️</button>
+  <button class="no" id="noBtn" onclick="clickNo()">No 🙈</button>
+</div>
+
+<div class="message" id="message">
+  You chose YES… and my heart is all yours 🥹❤️<br><br>
+  Thank you for loving me, choosing me,
+  and being my forever 🌹💖<br><br>
+  Happy Valentine’s Day 💕
+</div>
+
+  </div><script>
+  let noClicks = 0;
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const message = document.getElementById('message');
+
+  function clickNo(){
+    noClicks++;
+
+    /* smooth gradual growth */
+    const scale = 1 + noClicks * 0.25;
+    yesBtn.style.transform = `scale(${scale})`;
+
+    /* YES should ALWAYS stay above NO while growing */
+    yesBtn.style.zIndex = '3';
+    noBtn.style.zIndex = '1';
+
+    /* AFTER 4–5 clicks → NO fades out smoothly */
+    if(noClicks >= 4){
+      noBtn.style.opacity = '0';
+      noBtn.style.pointerEvents = 'none';
+    }
+  })`;
+
+    /* AFTER 4–5 clicks → overlap naturally */
+    if(noClicks >= 4){
+      yesBtn.style.zIndex = '3';
+      noBtn.style.opacity = '0';
+      noBtn.style.pointerEvents = 'none';
+    }
+  }
+
+  function sayYes(){
+    message.style.display = 'block';
+    launchLove();
+  }
+
+  function launchLove(){
+    const items = ['💕','🌹'];
+    for(let i=0;i<40;i++){
+      const el = document.createElement('div');
+      el.classList.add('float');
+      el.innerHTML = items[Math.floor(Math.random()*items.length)];
+      el.style.left = Math.random()*100+'vw';
+      el.style.animationDuration = 4 + Math.random()*3 +'s';
+      el.style.fontSize = 22 + Math.random()*22 +'px';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),7000);
+    }
+  }
+</script></body>
+</html>
